@@ -47,7 +47,7 @@ class phpHtmlWriterVanJs
 	{
 		$this->tag            = $tag;
 		$this->attributes     = $attributes;
-		$this->content        = (string) $content;
+		$this->content        = $content;
 		$this->encoding       = $encoding;
 		$this->isSelfClosing  = in_array($this->tag , self::$selfClosingTags);
 
@@ -79,7 +79,11 @@ class phpHtmlWriterVanJs
 			}
 		}
 		if (!empty($content)) {
-			$html .= $content;
+			if (is_string($content)) {
+				$html .= json_encode($content);
+			} else {
+				$html .= (string)$content;
+			}
 		}
 		return $html . ')';
 	}
