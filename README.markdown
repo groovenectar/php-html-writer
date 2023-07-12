@@ -121,7 +121,7 @@ The phpHtmlWriterHelper.php file contains predefined shortcuts functions.
 
     include('/path/to/php-html-writer/lib/phpHtmlWriterHelper.php');
 
-    echo tag('div#my_id.my_class', 'some content');
+    echo h('div#my_id.my_class', 'some content');
     <div id="my_id" class="my_class">some content</div>
 
 ## Run test suite
@@ -150,7 +150,7 @@ PHP HTML Writer is very extensible. You can replace easily each part of the impl
 
 ### Use your own HTML element implementation
 
-When you call ->tag(), a phpHtmlWriterElement instance is created.
+When you call `->tag()`, a phpHtmlWriterElement instance is created.
 This class represents an HTML element: it has a tag name, some attributes and a content.
 It is responsible for rendering itself.
 You can change the element class to override it by changing the "element_class" option:
