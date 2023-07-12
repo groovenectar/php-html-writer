@@ -130,7 +130,9 @@ class lime_test
     $passed = count($this->results['stats']['passed']);
     $failed = count($this->results['stats']['failed']);
     $total = $this->results['stats']['total'];
-    is_null($plan) and $plan = $total and $this->output->echoln(sprintf("1..%d", $plan));
+    if (is_null($plan) and $plan = $total) {
+        $this->output->echoln(sprintf("1..%d", $plan));
+    }
 
     if ($total > $plan)
     {
@@ -286,8 +288,8 @@ class lime_test
    */
   public function cmp_ok($exp1, $op, $exp2, $message = '')
   {
-    eval(sprintf("\$result = \$exp1 $op \$exp2;"));
-    if (!$this->ok($result, $message))
+    eval("\$result = \$exp1 $op \$exp2;");
+    if (!$this->ok($result ?? null, $message))
     {
       $this->set_last_test_errors(array(sprintf("      %s", str_replace("\n", '', var_export($exp1, true))), sprintf("          %s", $op), sprintf("      %s", str_replace("\n", '', var_export($exp2, true)))));
     }
@@ -568,12 +570,20 @@ class lime_output
 
   public function echoln($message, $colorizer_parameter = null, $colorize = true)
   {
-    if ($colorize)
+    if ($colorize && $message)
     {
-      $message = preg_replace('/(?:^|\.)((?:not ok|dubious) *\d*)\b/e', '$this->colorizer->colorize(\'$1\', \'ERROR\')', $message);
-      $message = preg_replace('/(?:^|\.)(ok *\d*)\b/e', '$this->colorizer->colorize(\'$1\', \'INFO\')', $message);
-      $message = preg_replace('/"(.+?)"/e', '$this->colorizer->colorize(\'$1\', \'PARAMETER\')', $message);
-      $message = preg_replace('/(\->|\:\:)?([a-zA-Z0-9_]+?)\(\)/e', '$this->colorizer->colorize(\'$1$2()\', \'PARAMETER\')', $message);
+      $message = preg_replace_callback('/(?:^|\.)((?:not ok|dubious) *\d*)\b/', function($matches) {
+          return $this->colorizer->colorize($matches[1], 'ERROR');
+      }, $message);
+      $message = preg_replace_callback('/(?:^|\.)(ok *\d*)\b/', function($matches) {
+          return $this->colorizer->colorize($matches[1], 'INFO');
+      }, $message);
+      $message = preg_replace_callback('/"(.+?)"/', function($matches) {
+          return $this->colorizer->colorize($matches[1], 'PARAMETER');
+      }, $message);
+      $message = preg_replace_callback('/(->|::)?([a-zA-Z0-9_]+?)\(\)/', function($matches) {
+          return $this->colorizer->colorize($matches[1] . $matches[2] . '()', 'PARAMETER');
+      }, $message);
     }
 
     echo ($colorizer_parameter ? $this->colorizer->colorize($message, $colorizer_parameter) : $message)."\n";

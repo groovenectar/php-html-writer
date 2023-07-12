@@ -47,7 +47,7 @@ class phpHtmlWriterCssExpressionParser
 
   protected function parseTag($expression)
   {
-    if('#' !== $expression{0} && '.' !== $expression{0})
+    if('#' !== $expression[0] && '.' !== $expression[0])
     {
       preg_match('/^(\w+)/', $expression, $result);
 
