@@ -42,9 +42,9 @@ class phpHtmlWriterAttributeStringParser
   {
     // regex credits: symfony 1.4 http://symfony-project.org/
     preg_match_all('/
-      \s*(\w+)              # key                               \\1
+      \s*([\w-]+)              # key                               \\1
       \s*=\s*               # =
-      (\'|")?               # values may be included in \' or " \\2
+      ([\'"])?               # values may be included in \' or " \\2
       (.*?)                 # value                             \\3
       (?(2) \\2)            # matching \' or " if needed        \\4
       \s*(?:
