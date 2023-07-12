@@ -13,6 +13,7 @@
  */
 
 require_once(dirname(__FILE__).'/phpHtmlWriterElement.php');
+require_once(dirname(__FILE__).'/phpHtmlWriterVanJs.php');
 
 class phpHtmlWriter
 {

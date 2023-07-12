@@ -7,14 +7,23 @@
 
 require_once(dirname(__FILE__).'/phpHtmlWriter.php');
 $phpHtmlWriterInstance = new phpHtmlWriter();
+$phpHtmlWriterVanJs = new phpHtmlWriter([
+	'element_class' => 'phpHtmlWriterVanJs',
+]);
 
 /**
  * @see phpHtmlWriter::tag()
  */
-function tag($cssExpression, $attributes = array(), $content = null)
+function h($cssExpression, $attributes = array(), $content = null)
 {
   global $phpHtmlWriterInstance;
   return $phpHtmlWriterInstance->tag($cssExpression, $attributes, $content);
+}
+
+function v($cssExpression, $attributes = array(), $content = null)
+{
+	global $phpHtmlWriterVanJs;
+	return $phpHtmlWriterVanJs->tag($cssExpression, $attributes, $content);
 }
 
 /**
