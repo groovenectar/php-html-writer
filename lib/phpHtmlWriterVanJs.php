@@ -148,9 +148,8 @@ class phpHtmlWriterVanJs
 	 */
 	public function getAttributesAsString()
 	{
-		$string = '';
 		if (empty($this->getAttributes())) {
-			return $string;
+			return '';
 		}
 		$collection = [];
 		foreach ($this->getAttributes() as $attribute => $value) {
