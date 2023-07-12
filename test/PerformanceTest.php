@@ -9,7 +9,7 @@ $view = new phpHtmlWriter();
 $nbTests  = 500;
 $nbTags   = 10;
 
-$t->is($view->tag('div'), '<div></div>', 'Writer is ready');
+$t->is((string)$view->tag('div'), '<div></div>', 'Writer is ready');
 
 $startTime  = microtime(true);
 

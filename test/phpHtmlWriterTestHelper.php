@@ -11,6 +11,10 @@ function php_html_writer_run_tests(lime_test $t, array $tests, $callable)
     {
       $result  = call_user_func_array($callable, $parameters);
 
+      if ($callable[1] === 'tag') {
+        $result = (string)$result;
+      }
+
       if(isset($test['throws']))
       {
         $t->fail($parameters[0].' throws a '.$test['throws']);

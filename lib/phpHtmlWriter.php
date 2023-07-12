@@ -62,7 +62,7 @@ class phpHtmlWriter
    * @param   string  $cssExpression      a valid CSS expression like "div.my_class"
    * @param   mixed   $attributes         additional HTML attributes, or tag content
    * @param   string  $content            tag content if attributes are provided
-   * @return  string                      the rendered tag
+   * @return  phpHtmlWriterElement        the tag object
    */
   public function tag($cssExpression, $attributes = array(), $content = null)
   {

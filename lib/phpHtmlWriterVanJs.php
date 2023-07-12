@@ -89,34 +89,6 @@ class phpHtmlWriterVanJs
 	}
 
 	/**
-	 * Open the element
-	 * @return  string  valid XHTML representation of the open tag of the element
-	 */
-	public function renderOpen()
-	{
-		if($this->isSelfClosing())
-		{
-			throw new LogicException($this->tag.' is a self-closing tag and not be opened - use->tag() instead');
-		}
-
-		return '<'.$this->getTag().$this->getAttributesAsString().'>';
-	}
-
-	/**
-	 * Close the element
-	 * @return  string  valid XHTML representation of the close tag of the element
-	 */
-	public function renderClose()
-	{
-		if($this->isSelfClosing())
-		{
-			throw new LogicException($this->tag.' is a self-closing tag and not be closed - use->tag() instead');
-		}
-
-		return '</'.$this->getTag().'>';
-	}
-
-	/**
 	 * Tell if the tag if self-closing
 	 * @return  bool  return true if the tag is self-closing, false otherwise
 	 */
@@ -186,19 +158,6 @@ class phpHtmlWriterVanJs
 			$collection[] = $key . ': ' . json_encode($value);
 		}
 		return '{' . implode(', ', $collection) . '}';
-	}
-
-	protected function parseJsonAttribute(array $attributes)
-	{
-		$json = json_encode($attributes['json']);
-
-		$attributes['class'] = isset($attributes['class'])
-			? $attributes['class'].' '.$json
-			: $json;
-
-		unset($attributes['json']);
-
-		return $attributes;
 	}
 
 	/**
