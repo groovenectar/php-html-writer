@@ -22,8 +22,8 @@ function h($cssExpression, $attributes = array(), $content = null)
 
 function v($cssExpression, $attributes = array(), $content = null)
 {
-	global $phpHtmlWriterVanJs;
-	return $phpHtmlWriterVanJs->tag($cssExpression, $attributes, $content);
+  global $phpHtmlWriterVanJs;
+  return $phpHtmlWriterVanJs->tag($cssExpression, $attributes, $content);
 }
 
 /**
