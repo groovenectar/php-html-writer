@@ -84,9 +84,7 @@ class phpHtmlWriter
      * create an element instance
      * @var phpHtmlWriterElement
      */
-    $element = new $this->options['element_class']($tag, $attributes, $content, $this->options['encoding']);
-
-    return $element->render();
+    return new $this->options['element_class']($tag, $attributes, $content, $this->options['encoding']);
   }
 
   /**
